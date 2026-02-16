@@ -346,7 +346,7 @@
     <canvas class="matrix-bg" id="matrixCanvas"></canvas>
     <div class="scanlines"></div>
     <div id="app"></div>
-    <script>
+        <script>
         // ==================== DATA STORE ====================
         const Store = {
             currentUser: null,
@@ -437,4 +437,578 @@
                             <button onclick="Router.navigate('auth')" class="cyber-btn text-lg">ENTER ARENA</button>
                             <button onclick="Router.navigate('admin')" class="cyber-btn cyber-btn-small border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black">ADMIN ACCESS</button>
                         </div>
-                     
+                        <div class="grid md:grid-cols-3 gap-6 text-sm opacity-60">
+                            <div>⚔️ Red Team Ops</div>
+                            <div>🛡️ Blue Team Defense</div>
+                            <div>⭐ Star Economy</div>
+                        </div>
+                    </div>
+                `;
+                return div;
+            },
+
+            auth() {
+                const div = document.createElement('div');
+                div.className = 'min-h-screen flex items-center justify-center p-6';
+                div.innerHTML = `
+                    <div class="cyber-card p-8 rounded-lg max-w-md w-full">
+                        <h2 class="font-cyber text-3xl font-bold mb-6 text-center">AUTHENTICATION</h2>
+                        <form onsubmit="Auth.handleAuth(event)">
+                            <input type="email" name="email" class="cyber-input rounded mb-4" placeholder="Email" required>
+                            <input type="password" name="password" class="cyber-input rounded mb-4" placeholder="Password" required>
+                            <div class="flex gap-2 mb-4">
+                                <button type="submit" name="action" value="login" class="flex-1 cyber-btn cyber-btn-small">Login</button>
+                                <button type="submit" name="action" value="register" class="flex-1 cyber-btn cyber-btn-small">Register</button>
+                            </div>
+                        </form>
+                        <button onclick="Router.navigate('landing')" class="w-full text-sm opacity-60 hover:opacity-100" style="background:none;border:none;color:inherit;cursor:pointer;">← Back</button>
+                    </div>
+                `;
+                return div;
+            },
+
+            profile() {
+                const div = document.createElement('div');
+                div.className = 'min-h-screen flex items-center justify-center p-6';
+                div.innerHTML = `
+                    <div class="cyber-card p-8 rounded-lg max-w-lg w-full">
+                        <h2 class="font-cyber text-3xl font-bold mb-2 text-center">COMPLETE PROFILE</h2>
+                        <p class="text-center mb-8 opacity-60">Step 1 of 3</p>
+                        <form onsubmit="Auth.saveProfile(event)">
+                            <input type="text" name="username" class="cyber-input rounded mb-4" placeholder="Username *" required>
+                            <input type="text" name="fullName" class="cyber-input rounded mb-4" placeholder="Full Name *" required>
+                            <select name="country" class="cyber-input rounded mb-4" required>
+                                <option value="">Select Country *</option>
+                                <option value="KE">Kenya</option>
+                                <option value="US">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="NG">Nigeria</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                            <textarea name="bio" class="cyber-input rounded mb-4" rows="3" placeholder="Bio"></textarea>
+                            <button type="submit" class="cyber-btn w-full">SAVE & CONTINUE →</button>
+                        </form>
+                    </div>
+                `;
+                return div;
+            },
+
+            payment() {
+                const code = 'CYB-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+                window.tempPaymentCode = code;
+                
+                const div = document.createElement('div');
+                div.className = 'min-h-screen flex items-center justify-center p-6';
+                div.innerHTML = `
+                    <div class="cyber-card p-8 rounded-lg max-w-lg w-full">
+                        <h2 class="font-cyber text-3xl font-bold mb-2 text-center">ACTIVATION PAYMENT</h2>
+                        <p class="text-center mb-8 opacity-60">Step 2 of 3: Send 20 KSh</p>
+                        
+                        <div class="bg-yellow-500/10 border border-yellow-500 p-4 rounded mb-6">
+                            <p class="text-yellow-400 font-bold mb-2">Your Payment Code:</p>
+                            <p class="text-3xl font-mono font-bold text-center">${code}</p>
+                            <p class="text-sm mt-2 opacity-80">Include this in M-Pesa reason</p>
+                        </div>
+
+                        <div class="space-y-2 mb-6 text-sm">
+                            <div class="flex justify-between p-2 bg-black/30 rounded"><span>Paybill:</span><span class="font-bold">0702117441</span></div>
+                            <div class="flex justify-between p-2 bg-black/30 rounded"><span>Amount:</span><span class="font-bold">20 KSh</span></div>
+                            <div class="flex justify-between p-2 bg-black/30 rounded"><span>Account:</span><span class="font-bold">Pochi la Biashara</span></div>
+                        </div>
+
+                        <form onsubmit="Auth.processPayment(event)">
+                            <input type="text" name="mpesaCode" class="cyber-input rounded mb-4" placeholder="M-Pesa Confirmation Code *" required maxlength="10">
+                            <input type="tel" name="mpesaNumber" class="cyber-input rounded mb-4" placeholder="Your M-Pesa Number *" required>
+                            <button type="submit" class="cyber-btn w-full">VERIFY & ACTIVATE</button>
+                        </form>
+                        
+                        <div class="mt-4 p-3 bg-blue-500/10 border border-blue-500 rounded text-sm">
+                            <p class="text-blue-400">You get 40★ instantly (1★ = 0.5 KSh)</p>
+                        </div>
+                    </div>
+                `;
+                return div;
+            },
+
+            team() {
+                const div = document.createElement('div');
+                div.className = 'min-h-screen flex items-center justify-center p-6';
+                div.innerHTML = `
+                    <div class="text-center max-w-4xl w-full">
+                        <h2 class="font-cyber text-4xl font-bold mb-2">CHOOSE YOUR FACTION</h2>
+                        <p class="text-center mb-12 opacity-60">Step 3 of 3</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="team-card cyber-card p-8 rounded-lg" onclick="Auth.selectTeam('red')">
+                                <div class="text-6xl mb-4">🔴</div>
+                                <h3 class="font-cyber text-3xl font-bold mb-4 text-red-500">RED TEAM</h3>
+                                <p class="mb-6 opacity-80">Offensive security. Break defenses, find vulnerabilities.</p>
+                                <ul class="text-left space-y-2 mb-6 text-sm">
+                                    <li>⚔️ Penetration Testing</li>
+                                    <li>🎯 Exploit Development</li>
+                                    <li>🔓 Social Engineering</li>
+                                </ul>
+                                <button class="cyber-btn w-full border-red-500 text-red-500 hover:bg-red-500 hover:text-black">JOIN RED TEAM</button>
+                            </div>
+
+                            <div class="team-card cyber-card p-8 rounded-lg" onclick="Auth.selectTeam('blue')">
+                                <div class="text-6xl mb-4">🔵</div>
+                                <h3 class="font-cyber text-3xl font-bold mb-4 text-cyan-400">BLUE TEAM</h3>
+                                <p class="mb-6 opacity-80">Defensive security. Monitor, detect, respond.</p>
+                                <ul class="text-left space-y-2 mb-6 text-sm">
+                                    <li>🛡️ Incident Response</li>
+                                    <li>🔍 Threat Hunting</li>
+                                    <li>📊 Security Monitoring</li>
+                                </ul>
+                                <button class="cyber-btn w-full border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black">JOIN BLUE TEAM</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return div;
+            },
+
+            dashboard() {
+                const user = Store.currentUser;
+                if (!user) { Router.navigate('auth'); return document.createElement('div'); }
+                
+                document.body.setAttribute('data-theme', user.team);
+                
+                const div = document.createElement('div');
+                div.className = 'min-h-screen pt-20 pb-12 px-6';
+                div.innerHTML = `
+                    <nav class="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md border-b z-50" style="border-color: var(--primary-color);">
+                        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                            <div class="font-cyber text-2xl font-bold cursor-pointer" onclick="Router.navigate('dashboard')">CYBERCLASH</div>
+                            <div class="flex items-center space-x-4">
+                                <div class="star-display">⭐ ${user.stars}★ <span class="text-xs opacity-60">(${user.stars * 0.5} KSh)</span></div>
+                                <span class="font-bold hidden md:inline">${user.username}</span>
+                                <button onclick="Auth.logout()" class="text-sm opacity-60 hover:opacity-100">LOGOUT</button>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="container mx-auto max-w-6xl">
+                        <div class="cyber-card p-6 rounded-lg mb-8 flex justify-between items-center">
+                            <div>
+                                <h1 class="font-cyber text-3xl font-bold mb-2">OPERATIONS CENTER</h1>
+                                <p class="opacity-60">Welcome back, ${user.username} | ${user.team.toUpperCase()} TEAM</p>
+                            </div>
+                        </div>
+
+                        <div class="grid lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2">
+                                <div class="cyber-card p-6 rounded-lg mb-6">
+                                    <h3 class="font-cyber text-xl mb-4">DEPLOY INTEL</h3>
+                                    <form onsubmit="Dashboard.createPost(event)">
+                                        <textarea name="content" class="cyber-input rounded mb-4" rows="3" placeholder="Share your latest hack, defense strategy..." required></textarea>
+                                        <button type="submit" class="cyber-btn cyber-btn-small">BROADCAST</button>
+                                    </form>
+                                </div>
+                                <div id="postsFeed">${Dashboard.renderPosts()}</div>
+                            </div>
+                            
+                            <div class="space-y-6">
+                                <div class="cyber-card p-6 rounded-lg">
+                                    <h3 class="font-cyber text-lg mb-4">TRANSFER STARS</h3>
+                                    <form onsubmit="Dashboard.transferStars(event)">
+                                        <input type="text" name="to" class="cyber-input rounded mb-2 text-sm" placeholder="Username" required>
+                                        <input type="number" name="amount" class="cyber-input rounded mb-2 text-sm" placeholder="Amount" min="1" required>
+                                        <button type="submit" class="cyber-btn cyber-btn-small w-full">SEND</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return div;
+            },
+
+            admin() {
+                const div = document.createElement('div');
+                div.className = 'min-h-screen flex items-center justify-center p-6';
+                div.innerHTML = `
+                    <div class="cyber-card p-8 rounded-lg max-w-md w-full border-yellow-500">
+                        <h2 class="font-cyber text-3xl font-bold mb-6 text-center text-yellow-400">ADMIN ACCESS</h2>
+                        <form onsubmit="Admin.login(event)">
+                            <input type="text" name="username" class="cyber-input rounded mb-4 border-yellow-500" placeholder="Admin Username" required>
+                            <input type="password" name="password" class="cyber-input rounded mb-6 border-yellow-500" placeholder="Password" required>
+                            <button type="submit" class="cyber-btn w-full border-yellow-500 text-yellow-400 hover:bg-yellow-400 hover:text-black">AUTHENTICATE</button>
+                        </form>
+                        <button onclick="Router.navigate('landing')" class="mt-4 w-full text-sm opacity-60 hover:opacity-100" style="background:none;border:none;color:inherit;cursor:pointer;">← Back</button>
+                    </div>
+                `;
+                return div;
+            },
+
+            adminPanel() {
+                const div = document.createElement('div');
+                div.className = 'min-h-screen pt-20 pb-12 px-6 bg-black';
+                div.innerHTML = `
+                    <nav class="fixed top-0 left-0 w-full bg-yellow-900/80 backdrop-blur-md border-b border-yellow-500 z-50">
+                        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                            <div class="font-cyber text-2xl font-bold text-yellow-400">ADMIN CONTROL</div>
+                            <button onclick="Admin.logout()" class="text-yellow-400 hover:text-white">LOGOUT</button>
+                        </div>
+                    </nav>
+
+                    <div class="container mx-auto max-w-7xl">
+                        <div class="grid md:grid-cols-4 gap-6 mb-8">
+                            <div class="cyber-card p-6 rounded-lg border-yellow-500">
+                                <h3 class="text-yellow-400 text-sm mb-2">TOTAL USERS</h3>
+                                <p class="text-3xl font-bold">${Store.users.length}</p>
+                            </div>
+                            <div class="cyber-card p-6 rounded-lg border-yellow-500">
+                                <h3 class="text-yellow-400 text-sm mb-2">PENDING</h3>
+                                <p class="text-3xl font-bold text-orange-400">${Store.users.filter(u => u.paymentStatus === 'pending').length}</p>
+                            </div>
+                            <div class="cyber-card p-6 rounded-lg border-yellow-500">
+                                <h3 class="text-yellow-400 text-sm mb-2">TOTAL STARS</h3>
+                                <p class="text-3xl font-bold text-green-400">${Store.users.reduce((a, u) => a + (u.stars || 0), 0)}★</p>
+                            </div>
+                            <div class="cyber-card p-6 rounded-lg border-yellow-500">
+                                <h3 class="text-yellow-400 text-sm mb-2">REVENUE</h3>
+                                <p class="text-3xl font-bold text-green-400">${Store.users.filter(u => u.paymentStatus === 'verified').length * 20} KSh</p>
+                            </div>
+                        </div>
+
+                        <div class="cyber-card p-6 rounded-lg border-yellow-500 overflow-x-auto">
+                            <h3 class="font-cyber text-xl mb-4 text-yellow-400">USER MANAGEMENT</h3>
+                            <table class="admin-table">
+                                <thead>
+                                    <tr><th>User</th><th>Team</th><th>Stars</th><th>Status</th><th>Actions</th></tr>
+                                </thead>
+                                <tbody>
+                                    ${Store.users.map(u => `
+                                        <tr>
+                                            <td>
+                                                <div class="font-bold">${u.username}</div>
+                                                <div class="text-xs opacity-60">${u.email}</div>
+                                            </td>
+                                            <td class="${u.team === 'red' ? 'text-red-500' : 'text-cyan-400'}">${u.team?.toUpperCase() || 'NONE'}</td>
+                                            <td class="star-display">${u.stars || 0}★</td>
+                                            <td>${u.paymentStatus === 'verified' ? '<span class="text-green-400">✓ Verified</span>' : '<span class="text-orange-400">⏳ Pending</span>'}</td>
+                                            <td>
+                                                <button onclick="Admin.addStars('${u.id}')" class="cyber-btn cyber-btn-small bg-green-500 text-black border-none mr-2">+★</button>
+                                                <button onclick="Admin.removeStars('${u.id}')" class="cyber-btn cyber-btn-small bg-red-500 text-white border-none mr-2">-★</button>
+                                                ${u.paymentStatus === 'pending' ? `<button onclick="Admin.verifyUser('${u.id}')" class="cyber-btn cyber-btn-small bg-blue-500 text-white border-none">Verify</button>` : ''}
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                return div;
+            }
+        };
+                    // ==================== AUTH CONTROLLER ====================
+        const Auth = {
+            tempUser: null,
+
+            handleAuth(event) {
+                event.preventDefault();
+                const form = event.target;
+                const email = form.email.value;
+                const password = form.password.value;
+                const action = event.submitter.value;
+
+                if (action === 'register') {
+                    if (Store.users.find(u => u.email === email)) {
+                        alert('Email already registered');
+                        return;
+                    }
+                    this.tempUser = { id: 'u_' + Date.now(), email, password };
+                    Router.navigate('profile');
+                } else {
+                    const user = Store.users.find(u => u.email === email && u.password === password);
+                    if (!user) {
+                        alert('Invalid credentials');
+                        return;
+                    }
+                    Store.currentUser = user;
+                    if (!user.team) Router.navigate('team');
+                    else Router.navigate('dashboard');
+                }
+            },
+
+            saveProfile(event) {
+                event.preventDefault();
+                const form = event.target;
+                const username = form.username.value;
+                
+                if (Store.users.find(u => u.username === username)) {
+                    alert('Username taken');
+                    return;
+                }
+
+                Store.currentUser = {
+                    ...this.tempUser,
+                    username,
+                    fullName: form.fullName.value,
+                    country: form.country.value,
+                    bio: form.bio.value,
+                    stars: 0,
+                    paymentStatus: 'pending'
+                };
+                
+                Store.users.push(Store.currentUser);
+                Store.save();
+                Router.navigate('payment');
+            },
+
+            processPayment(event) {
+                event.preventDefault();
+                const form = event.target;
+                const user = Store.currentUser;
+                
+                user.paymentCode = window.tempPaymentCode;
+                user.mpesaCode = form.mpesaCode.value;
+                user.mpesaNumber = form.mpesaNumber.value;
+                user.stars = 40; // Instant 40 stars
+                user.paymentStatus = 'pending'; // Admin verifies later
+                
+                Store.save();
+                Store.showToast('Payment submitted! 40 stars added.');
+                Router.navigate('team');
+            },
+
+            selectTeam(team) {
+                Store.currentUser.team = team;
+                Store.save();
+                Router.navigate('dashboard');
+            },
+
+            logout() {
+                Store.currentUser = null;
+                Router.navigate('landing');
+            }
+        };
+
+        // ==================== DASHBOARD CONTROLLER ====================
+        const Dashboard = {
+            createPost(event) {
+                event.preventDefault();
+                const content = event.target.content.value;
+                const post = {
+                    id: Date.now(),
+                    userId: Store.currentUser.id,
+                    username: Store.currentUser.username,
+                    userTeam: Store.currentUser.team,
+                    content,
+                    likes: [],
+                    comments: [],
+                    stars: 0,
+                    timestamp: new Date().toISOString()
+                };
+                Store.posts.unshift(post);
+                Store.save();
+                Router.navigate('dashboard');
+            },
+
+            renderPosts() {
+                return Store.posts.map(post => {
+                    const isLiked = post.likes.includes(Store.currentUser.id);
+                    const heartClass = post.userTeam === 'red' ? 'red-team' : 'blue-team';
+                    const heartIcon = post.userTeam === 'red' ? '🔴' : '🔵';
+                    
+                    return `
+                        <div class="post-card">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center font-bold">${post.username[0]}</div>
+                                    <div>
+                                        <div class="font-bold ${post.userTeam === 'red' ? 'text-red-400' : 'text-cyan-400'}">${post.username}</div>
+                                        <div class="text-xs opacity-60">${new Date(post.timestamp).toLocaleString()}</div>
+                                    </div>
+                                </div>
+                                <div class="star-display text-sm">${post.stars}★ received</div>
+                            </div>
+                            <p class="mb-4 whitespace-pre-wrap">${post.content}</p>
+                            <div class="flex items-center gap-4 border-t border-white/10 pt-3">
+                                <button onclick="Dashboard.likePost(${post.id})" class="heart-btn ${heartClass} ${isLiked ? 'liked' : ''}">
+                                    ${heartIcon} ${post.likes.length}
+                                </button>
+                                <button onclick="Dashboard.giftStars(${post.id})" class="text-sm opacity-60 hover:opacity-100 ml-auto">
+                                    ⭐ Gift Stars
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('') || '<p class="text-center opacity-60 py-8">No intel yet. Be the first to post!</p>';
+            },
+
+            likePost(postId) {
+                const post = Store.posts.find(p => p.id === postId);
+                const idx = post.likes.indexOf(Store.currentUser.id);
+                if (idx === -1) {
+                    post.likes.push(Store.currentUser.id);
+                    // 20 likes = 1 star reward
+                    if (post.likes.length % 20 === 0) {
+                        const author = Store.getUser(post.userId);
+                        if (author) {
+                            author.stars = (author.stars || 0) + 1;
+                            Store.showToast(`${author.username} earned 1★ for 20 likes!`);
+                        }
+                    }
+                } else {
+                    post.likes.splice(idx, 1);
+                }
+                Store.save();
+                Router.navigate('dashboard');
+            },
+
+            giftStars(postId) {
+                const amount = parseInt(prompt('How many stars to gift?'));
+                if (!amount || amount < 1) return;
+                
+                const post = Store.posts.find(p => p.id === postId);
+                const author = Store.getUser(post.userId);
+                
+                if (Store.currentUser.stars < amount) {
+                    alert('Insufficient stars');
+                    return;
+                }
+                
+                Store.currentUser.stars -= amount;
+                author.stars = (author.stars || 0) + amount;
+                post.stars += amount;
+                
+                Store.transactions.push({
+                    id: Date.now(),
+                    fromId: Store.currentUser.id,
+                    toId: author.id,
+                    type: 'gift',
+                    amount,
+                    timestamp: new Date().toISOString()
+                });
+                
+                Store.save();
+                Store.showToast(`Gifted ${amount}★ to ${author.username}`);
+                Router.navigate('dashboard');
+            },
+
+            transferStars(event) {
+                event.preventDefault();
+                const form = event.target;
+                const toUser = Store.users.find(u => u.username === form.to.value);
+                const amount = parseInt(form.amount.value);
+                
+                if (!toUser) { alert('User not found'); return; }
+                if (Store.currentUser.stars < amount) { alert('Insufficient stars'); return; }
+                
+                Store.currentUser.stars -= amount;
+                toUser.stars = (toUser.stars || 0) + amount;
+                
+                Store.transactions.push({
+                    id: Date.now(),
+                    fromId: Store.currentUser.id,
+                    toId: toUser.id,
+                    type: 'transfer',
+                    amount,
+                    timestamp: new Date().toISOString()
+                });
+                
+                Store.save();
+                Store.showToast(`Transferred ${amount}★ to ${toUser.username}`);
+                form.reset();
+            }
+        };
+
+        // ==================== ADMIN CONTROLLER ====================
+        const Admin = {
+            login(event) {
+                event.preventDefault();
+                const form = event.target;
+                // Hardcoded admin credentials - CHANGE THESE!
+                if (form.username.value === 'admin' && form.password.value === 'cyberclash2024') {
+                    sessionStorage.setItem('admin', 'true');
+                    Router.navigate('adminPanel');
+                } else {
+                    alert('Invalid admin credentials');
+                }
+            },
+
+            logout() {
+                sessionStorage.removeItem('admin');
+                Router.navigate('admin');
+            },
+
+            addStars(userId) {
+                const amount = parseInt(prompt('How many stars to add?'));
+                if (!amount) return;
+                const user = Store.getUser(userId);
+                user.stars = (user.stars || 0) + amount;
+                Store.transactions.push({
+                    id: Date.now(),
+                    userId,
+                    type: 'add',
+                    amount,
+                    by: 'admin',
+                    timestamp: new Date().toISOString()
+                });
+                Store.save();
+                Store.showToast(`Added ${amount}★ to ${user.username}`);
+                Router.navigate('adminPanel');
+            },
+
+            removeStars(userId) {
+                const amount = parseInt(prompt('How many stars to remove?'));
+                if (!amount) return;
+                const user = Store.getUser(userId);
+                if ((user.stars || 0) < amount) {
+                    alert('User doesn\'t have enough stars');
+                    return;
+                }
+                user.stars -= amount;
+                Store.transactions.push({
+                    id: Date.now(),
+                    userId,
+                    type: 'remove',
+                    amount,
+                    by: 'admin',
+                    timestamp: new Date().toISOString()
+                });
+                Store.save();
+                Store.showToast(`Removed ${amount}★ from ${user.username}`);
+                Router.navigate('adminPanel');
+            },
+
+            verifyUser(userId) {
+                const user = Store.getUser(userId);
+                user.paymentStatus = 'verified';
+                Store.save();
+                Store.showToast(`Verified ${user.username}`);
+                Router.navigate('adminPanel');
+            }
+        };
+
+        // ==================== INIT ====================
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check for existing session
+            const saved = localStorage.getItem('cc_currentUser');
+            if (saved) {
+                Store.currentUser = JSON.parse(saved);
+                // Restore full user object from users array
+                const full = Store.getUser(Store.currentUser.id);
+                if (full) Store.currentUser = full;
+            }
+            
+            // Check admin session
+            if (sessionStorage.getItem('admin') === 'true' && window.location.hash === '#admin') {
+                Router.navigate('adminPanel');
+            } else {
+                Router.navigate('landing');
+            }
+        });
+
+        // Save current user on changes
+        setInterval(() => {
+            if (Store.currentUser) {
+                localStorage.setItem('cc_currentUser', JSON.stringify(Store.currentUser));
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
