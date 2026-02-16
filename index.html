@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberClash - Red Team vs Blue Team Arena</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00f0ff;
+            --secondary-color: #0066ff;
+            --bg-color: #0a0e27;
+            --accent-glow: rgba(0, 240, 255, 0.3);
+        }
+
+        [data-theme="red"] {
+            --primary-color: #ff003c;
+            --secondary-color: #ff6b35;
+            --bg-color: #1a0505;
+            --accent-glow: rgba(255, 0, 60, 0.3);
+        }
+
+        [data-theme="blue"] {
+            --primary-color: #00f0ff;
+            --secondary-color: #0066ff;
+            --bg-color: #0a0e27;
+            --accent-glow: rgba(0, 240, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .font-cyber {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .glitch {
+            position: relative;
+            animation: glitch-skew 1s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            20% { clip: rect(76px, 9999px, 11px, 0); }
+            40% { clip: rect(99px, 9999px, 21px, 0); }
+            60% { clip: rect(45px, 9999px, 87px, 0); }
+            80% { clip: rect(12px, 9999px, 65px, 0); }
+            100% { clip: rect(88px, 9999px, 32px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 99px, 0); }
+            20% { clip: rect(23px, 9999px, 45px, 0); }
+            40% { clip: rect(87px, 9999px, 12px, 0); }
+            60% { clip: rect(34px, 9999px, 78px, 0); }
+            80% { clip: rect(56px, 9999px, 23px, 0); }
+            100% { clip: rect(12px, 9999px, 89px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(-2deg); }
+            20% { transform: skew(2deg);
+Kimi: I understand your frustration with the blue screen and the copy-paste issues. Unfortunately, **I cannot generate downloadable files** - this is a hard limitation of my system.
+
+However, I can provide you with a **clean, complete solution** that will definitely work. Let me give you the **full working code in manageable sections** with clear instructions on how to assemble it.
+
+## **The Problem & Solution**
+
+The blue screen happens because:
+1. The code was cut off (truncated)
+2. Missing closing tags and JavaScript functions
+3. Browser renders partial HTML as broken
+
+## **Here's the Complete, Working Code**
+
+I'll provide it in **3 parts**. You must save each part in order into your `index.html` file:
+
+---
+
+### **PART 1: HTML Head and Styles**
+(Copy this first, from `<!DOCTYPE html>` to `</style>`)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberClash - Red Team vs Blue Team Arena</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00f0ff;
+            --secondary-color: #0066ff;
+            --bg-color: #0a0e27;
+            --accent-glow: rgba(0, 240, 255, 0.3);
+        }
+
+        [data-theme="red"] {
+            --primary-color: #ff003c;
+            --secondary-color: #ff6b35;
+            --bg-color: #1a0505;
+            --accent-glow: rgba(255, 0, 60, 0.3);
+        }
+
+        [data-theme="blue"] {
+            --primary-color: #00f0ff;
+            --secondary-color: #0066ff;
+            --bg-color: #0a0e27;
+            --accent-glow: rgba(0, 240, 255, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.1;
+        }
+
+        .glitch {
+            position: relative;
+            animation: glitch-skew 1s infinite;
+        }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            20% { clip: rect(76px, 9999px, 11px, 0); }
+            40% { clip: rect(99px, 9999px, 21px, 0); }
+            60% { clip: rect(45px, 9999px, 87px, 0); }
+            80% { clip: rect(12px, 9999px, 65px, 0); }
+            100% { clip: rect(88px, 9999px, 32px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 99px, 0); }
+            20% { clip: rect(23px, 9999px, 45px, 0); }
+            40% { clip: rect(87px, 9999px, 12px, 0); }
+            60% { clip: rect(34px, 9999px, 78px, 0); }
+            80% { clip: rect(56px, 9999px, 23px, 0); }
+            100% { clip: rect(12px, 9999px, 89px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(-2deg); }
+            20% { transform: skew(2deg); }
+            30% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+
+        .cyber-btn {
+            position: relative;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .cyber-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .cyber-btn:hover::before { left: 100%; }
+        .cyber-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .cyber-btn-small { padding: 0.5rem 1rem; font-size: 0.8rem; }
+
+        .cyber-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--primary-color);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), transparent, var(--primary-color));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cyber-card:hover::before { opacity: 1; }
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        .cyber-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            width: 100%;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .cyber-input:focus {
+            box-shadow: 0 0 20px var(--accent-glow);
+            border-width: 2px;
+        }
+
+        .cyber-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+        .team-card {
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .team-card:hover { transform: scale(1.05); }
+        .team-card.selected-red {
+            border-color: #ff003c;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.5);
+            background: rgba(255, 0, 60, 0.1);
+        }
+        .team-card.selected-blue {
+            border-color: #00f0ff;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.3;
+        }
+
+        .hidden-section { display: none !important; }
+        .visible-section { display: block; animation: fadeIn 0.5s ease-in; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-link {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .status-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        .status-online {
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .star-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .post-card {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .heart-btn {
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .heart-btn:hover { transform: scale(1.2); }
+        .heart-btn.red-team { color: #ff003c; }
+        .heart-btn.blue-team { color: #00f0ff; }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-table th {
+            background: rgba(255,255,255,0.1);
+            font-weight: bold;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: var(--bg-color);
+            border-radius: 4px;
+            z-index: 10001;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body data-theme="blue">
+    <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+    <div class="scanlines"></div>
+    <div id="app"></div>
+```
+
+---
+
+### **PART 2: JavaScript Logic**
+(Copy this immediately after Part 1, before `</body></html>`)
+
+```html
+    <script>
+        // ==================== DATA STORE ====================
+        const Store = {
+            currentUser: null,
+            users: JSON.parse(localStorage.getItem('cc_users') || '[]'),
+            posts: JSON.parse(localStorage.getItem('cc_posts') || '[]'),
+            squads: JSON.parse(localStorage.getItem('cc_squads') || '[]'),
+            chats: JSON.parse(localStorage.getItem('cc_chats') || '[]'),
+            transactions: JSON.parse(localStorage.getItem('cc_trans') || '[]'),
+            
+            save() {
+                localStorage.setItem('cc_users', JSON.stringify(this.users));
+                localStorage.setItem('cc_posts', JSON.stringify(this.posts));
+                localStorage.setItem('cc_squads', JSON.stringify(this.squads));
+                localStorage.setItem('cc_chats', JSON.stringify(this.chats));
+                localStorage.setItem('cc_trans', JSON.stringify(this.transactions));
+            },
+
+            getUser(id) { return this.users.find(u => u.id === id); },
+            
+            showToast(msg) {
+                const t = document.createElement('div');
+                t.className = 'toast';
+                t.textContent = msg;
+                document.body.appendChild(t);
+                setTimeout(() => t.remove(), 3000);
+            }
+        };
+
+        // ==================== MATRIX EFFECT ====================
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let i = 0; i < columns; i++) drops[i] = 1;
+
+        function drawMatrix() {
+            const theme = document.body.getAttribute('data-theme');
+            const color = theme === 'red' ? 'rgba(255, 0, 60, 0.05)' : 'rgba(0, 240, 255, 0.05)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = color;
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 35);
+
+        // ==================== ROUTER ====================
+        const Router = {
+            currentRoute: 'landing',
+            navigate(route) {
+                this.currentRoute = route;
+                this.render();
+            },
+            render() {
+                const app = document.getElementById('app');
+                app.innerHTML = '';
+                switch(this.currentRoute) {
+                    case 'landing': app.appendChild(Pages.landing()); break;
+                    case 'auth': app.appendChild(Pages.auth()); break;
+                    case 'profile': app.appendChild(Pages.profile()); break;
+                    case 'payment': app.appendChild(Pages.payment()); break;
+                    case 'team': app.appendChild(Pages.team()); break;
+                    case 'dashboard': app.appendChild(Pages.dashboard()); break;
+                    case 'admin': app.appendChild(Pages.admin()); break;
+                    case 'adminPanel': app.appendChild(Pages.adminPanel()); break;
+                }
+            }
+        };
+
+        // ==================== PAGES ====================
+        const Pages = {
+            landing() {
+                const div = document.createElement('div');
+                div.className = 'min-h-screen flex items-center justify-center p-6';
+                div.innerHTML = `
+                    <div class="text-center max-w-4xl">
+                        <h1 class="font-cyber text-6xl md:text-8xl font-black mb-6 glitch" data-text="CYBERCLASH">CYBERCLASH</h1>
+                        <p class="text-xl md:text-2xl mb-8 opacity-80">Red Team vs Blue Team Arena. Hack, defend, earn stars.</p>
+                        <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
+                            <button onclick="Router.navigate('auth')" class="cyber-btn text-lg">ENTER ARENA</button>
+                            <button onclick="Router.navigate('admin')" class="cyber-btn cyber-btn-small border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black">ADMIN ACCESS</button>
+                        </div>
+                     
